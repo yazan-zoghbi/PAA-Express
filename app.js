@@ -1,5 +1,7 @@
 const express = require("express");
 
+const db = require("./config/db");
+
 const serpRouter = require("./routes/main");
 
 const app = express();
@@ -17,6 +19,8 @@ app.use((err, req, res, next) => {
 app.use("/", serpRouter);
 
 // start server
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+db.connect().then(() => {
+  app.listen(3000, () => {
+    console.log("Server started at port 3000");
+  });
 });

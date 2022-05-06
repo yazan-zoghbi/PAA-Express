@@ -1,8 +1,10 @@
-const express = require("express");
+// import express from 'express';
+
+import express, { Request, Response, NextFunction } from "express";
 
 const db = require("./config/db");
 
-const serpRouter = require("./routes/main");
+import serpRouter from "./routes/main";
 
 const app = express();
 
@@ -11,7 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // use error handler middleware to handle errors in routes and send error response to client
-app.use((err, req, res, next) => {
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).send({ error: err.message });
 });
 

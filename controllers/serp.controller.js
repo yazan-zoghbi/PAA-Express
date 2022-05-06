@@ -6,7 +6,8 @@ module.exports = {
   },
   post: async (req, res) => {
     const keyword = req.body.keyword;
-    const results = await serp.fetch(keyword);
+    const location = req.body.location;
+    const results = await serp.fetch(keyword, location);
     res.status(200).send(results);
   },
 };

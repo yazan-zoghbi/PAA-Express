@@ -3,20 +3,26 @@ const puppeteer = require("puppeteer");
 
 const validateQuery = require("../utils/validate-query");
 const validateQuestions = require("../utils/validate-questions");
+const validateLocation = require("../utils/validate-location");
+const validateLink = require("../utils/validate-link");
 
 module.exports = {
-  fetch: async (query) => {
+  fetch: async (query, location) => {
+    const link = await validateLink.get(location);
     if (!validateQuery.check(query)) {
       return { error: "Invalid query" };
+    }
+
+    if (!validateLocation.check(location)) {
+      return { error: "Invalid location" };
     }
 
     const browser = await puppeteer.launch({
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
     const page = await browser.newPage();
-    await page.goto(
-      `https://www.google.com/search?q=${validateQuery.trim(query)}`
-    );
+
+    await page.goto(link + `${validateQuery.trim(query)}`);
 
     const html = await page.content();
     await browser.close();
@@ -42,6 +48,7 @@ module.exports = {
     }
     return {
       query,
+      location,
       results,
     };
   },

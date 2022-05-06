@@ -7,9 +7,7 @@ module.exports = {
     if (trimmedQuery.length < 3 || trimmedQuery.length > 100) {
       return false;
     }
-    if (!regex.test(trimmedQuery)) {
-      return false;
-    }
+
     return true;
   },
 

@@ -1,4 +1,4 @@
-module.exports = {
+const hreflang: { [key: string]: string } = {
   "en-US": "https://www.google.com/search?q=", // English (United States)
   "en-GB": "https://www.google.co.uk/search?q=", // English (United Kingdom)
   "en-IN": "https://www.google.co.in/search?q=", // English (India)
@@ -14,3 +14,4 @@ module.exports = {
   "en-AE": "https://www.google.ae/search?q=", // English (United Arab Emirates)
 };
 
+export default hreflang;

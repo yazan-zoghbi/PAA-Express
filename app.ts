@@ -2,8 +2,6 @@
 
 import express, { Request, Response, NextFunction } from "express";
 
-const db = require("./config/db");
-
 import serpRouter from "./routes/main";
 
 const app = express();
@@ -21,8 +19,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 app.use("/", serpRouter);
 
 // start server
-db.connect().then(() => {
-  app.listen(3000, () => {
-    console.log("Server started at port 3000");
-  });
+app.listen(3000, () => {
+  console.log("Server started at port 3000");
 });
